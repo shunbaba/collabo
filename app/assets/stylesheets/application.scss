@@ -14,20 +14,32 @@
  *= require_self
  */
 
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
  body{
- 	background: #DDDDDD;
+ 	background: white;
  	margin: 0;
  }
 
 
 h1{
 	text-align: center;
+	display: inline-block;
+  	transition: .3s;
+  	-webkit-transform: scale(1);
+  	transform: scale(1);
+}
+
+h1:hover {
+  color: orange;
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .profile{
 	background-image: url(subtle-light-pattern.jpg);
 	width: 100%;
-
 }
 
 .profile td

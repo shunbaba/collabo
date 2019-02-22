@@ -1,0 +1,100 @@
+
+<ul class="nav nav-tabs">
+	<li role="presentation" class="active"><a href="#">ホーム</a></li>
+	<li role="presentation"><a href="#">メニューＡ</a></li>
+	<li role="presentation"><a href="#">メニューＢ</a></li>
+</ul>
+
+<h1>投稿一覧</h1>
+
+
+<div class="toTop">
+	<%=link_to 'top', '/top' %>
+</div>
+<div class="new">
+	<%=link_to '新規投稿', "/posts/new" %>
+</div>
+
+
+
+<h1>新規投稿</h1>
+
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-2">
+			<!-- form_for部分 -->
+			<%= form_for(@post) do |f| %>
+
+			<h4>タイトル</h4>
+			<%= f.text_field :title %>
+
+			<h4>天気</h4>
+			<%= f.text_field :weather %>
+
+			<h4>本文</h4>
+			<%= f.text_area :body %>
+
+			<%= f.submit '投稿' %>
+
+			<% end %>
+		</div>
+		<div class="col-md-10">
+			<table class="table">
+				<th>
+					<p>編集</p>
+				</th>
+				<th>
+					<p>削除</p>
+				</th>
+				<th>
+					<p>タイトル</p>
+				</th>
+				<th>
+					<p>天気</p>
+				</th>
+				<th>
+					<p>本文</p>
+				</th>
+				<th>
+					<p>投稿時間</p>
+				</th>
+				<th>
+					<p>画像</p>
+				</th>
+
+				<% @posts.each.with_index(1) do |post, i| %>
+				<tr>
+					<td>
+						<%=link_to '[編集]', edit_post_path(post.id) %>
+					</td>
+					<td>
+						<%= link_to "[削除]", destroy_post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+					</td>
+					<td>
+						<span>
+							<%=link_to post.title, "/posts/#{post.id}" %>
+						</span>
+					</td>
+					<td>
+						<span><%= post.weather %></span>
+					</td>
+					<td>
+						<span><%= post.body %></span>
+					</td>
+					<td>
+						<span><%= post.created_at.strftime('%Y/%m/%d %H:%M') %></span>
+					</td>
+					<td>
+						<% if post.image.present? %>
+							<%= attachment_image_tag post, :image, :fill, 100, 100, format: 'jpeg' %>
+						<% else %>
+							<%= image_tag 'no_img.png', :size => "100x100", :class => "no_img"%>
+						<% end %>
+					</td>
+				</tr>
+				<% end %>
+			</table>
+		</div>
+	</div>
+</div>

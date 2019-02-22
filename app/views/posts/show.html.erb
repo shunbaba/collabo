@@ -1,0 +1,17 @@
+<h2>タイトル</h2>
+<p><%= @post.title %></p>
+<h2>天気</h2>
+<p><%= @post.weather %></p>
+<h2>本文</h2>
+<p><%= @post.body %></p>
+<h2>画像</h2>
+<p><%= attachment_image_tag @post, :image, :fill, 300, 300, format: 'jpeg' %></p>
+<%= link_to "編集", edit_post_path(@post.id) %>
+<p>投稿時間</p>
+  <span><%= @post.created_at.strftime('%Y/%m/%d %H:%M') %></span>
+
+<p><%= link_to "削除", destroy_post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
+<div class="back">
+		<%=link_to '戻る', '/index' %>
+</div>
+
