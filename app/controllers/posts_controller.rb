@@ -20,9 +20,12 @@ class PostsController < ApplicationController
     # ストロングパラメーターを使用
      post = Article.new(post_params)
     # DBへ保存する
-     post.save
-    # トップ画面へリダイレクト
-    redirect_to index_path
+    if post.save
+      # トップ画面へリダイレクト
+      redirect_to index_path
+    else
+      render 'new' #失敗の場合 
+    end
   end
 
   def update
@@ -34,7 +37,7 @@ class PostsController < ApplicationController
   def destroy
     post = Article.find(params[:id])
     post.destroy
-    redirect_to index_path
+    redirect_to indexfF_path
   end
 
 	private

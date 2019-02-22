@@ -1,6 +1,10 @@
 <h1>Posts#new</h1>
 <p>Find me in app/views/posts/new.html.erb</p>
 
+<% if @post.errors.any? %>
+   <p>エラーでーす。</p>
+<% end %>
+
 <h1>新規投稿</h1>
 <!-- form_for部分 -->
 <%= form_for(@post) do |f| %>
